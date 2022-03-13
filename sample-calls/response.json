@@ -1,0 +1,58 @@
+{
+    "play_for_quest": "False",
+    "summoner_id": "437",
+    "summoner_wins": "0,680000",
+    "monster_1_id": "388",
+    "monster_1_wins": "0,680000",
+    "monster_2_id": "425",
+    "monster_2_wins": "0,680000",
+    "monster_3_id": "384",
+    "monster_3_wins": "0,680000",
+    "monster_4_id": "385",
+    "monster_4_wins": "0,680000",
+    "monster_5_id": "174",
+    "monster_5_wins": "0,680000",
+    "monster_6_id": "190",
+    "monster_6_wins": "0,680000",
+    "color": "water",
+    "teamRank": 2
+  }
+
+  {
+    "play_for_quest":"False",
+    "summoner_id":"438",
+    "summoner_wins":"0,680000",
+    "monster_1_id":"432",
+    "monster_1_wins":"0,680000",
+    "monster_2_id":"365",
+    "monster_2_wins":"0,680000",
+    "monster_3_id":"362",
+    "monster_3_wins":"0,680000",
+    "monster_4_id":"360",
+    "monster_4_wins":"0,680000",
+    "monster_5_id":"445",
+    "monster_5_wins":"0,680000",
+    "monster_6_id":"352",
+    "monster_6_wins":"0,680000",
+    "color":"death","teamRank":2}
+  
+
+  {
+    "play_for_quest":"False",
+    "summoner_id":"438",
+    "summoner_wins":"0,680000",
+    "color":"death",
+    "teamRank":2,
+    "monster_1_id":"432",
+    "monster_1_wins":"0,680000",
+    "monster_2_id":"365",
+    "monster_2_wins":"0,680000",
+    "monster_3_id":"362",
+    "monster_3_wins":"0,680000",
+    "monster_4_id":"357",
+    "monster_4_wins":"0,680000",
+    "monster_5_id":"445",
+    "monster_5_wins":"0,680000",
+    "monster_6_id":"352",
+    "monster_6_wins":"0,680000"
+  }
