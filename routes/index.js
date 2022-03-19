@@ -4,27 +4,18 @@ const { route } = require('express/lib/application');
 const req = require('express/lib/request');
 var router = express.Router();
 var fs = require('fs'); /* Put it where other modules included */
+const { get_strategy, strategy_file_path } = require('./logic/strategy.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-var rules_to_exclude = [
-  'Back to Basics',
-  'Broken Arrows',
-  'Close Range',
-  'Even Stevens',
-  'Keep Your Distance',
-  'Little League',
-  'Lost Legendaries',
-  'Lost Magic',
-  'Odd Ones Out',
-  'Rise of the Commons',
-  'Taking Sides',
-  'Up Close & Personal',
-]
-
+// if we have a custom strategy 
+//      AND we have the cards it specifies 
+//      AND the mana request is one we have a strategy for, 
+//      THEN use it
+// else, pass thru
 router.post('/get_team', async function(req, res, next) {
 
   console.log(JSON.stringify(req.body));
@@ -46,29 +37,17 @@ router.post('/get_team', async function(req, res, next) {
       }
     }
   }
-
   await passThruCall(req.body, res);
 });
 
 function get_cards_to_play(strategy, mana) {
-  const strategy_file = `${process.env.STRATEGIES_FOLDER}/${strategy}.json`;
+  const strategy_file = strategy_file_path(strategy);
   var cards_to_play = JSON.parse(fs.readFileSync(strategy_file, 'utf8')); 
 
   if(mana > cards_to_play[cards_to_play.length - 1].mana) {
     return cards_to_play[cards_to_play.length - 1];
   }
   return cards_to_play.find(c => c.mana === mana);
-}
-
-function get_strategy(request_obj) {
-
-  for(i = 0; i < rules_to_exclude.length; i++){
-    if(request_obj.rules.indexOf(rules_to_exclude[i]) >= 0)
-      return null;
-  }
-  if(request_obj.splinters.includes('death')) return 'death';
-  if(request_obj.splinters.includes('earth')) return 'earth';
-  return null;
 }
 
 function get_filled_response(cards_by_mana) {
