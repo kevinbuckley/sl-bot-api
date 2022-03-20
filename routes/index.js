@@ -30,7 +30,7 @@ router.post('/get_team', async function(req, res, next) {
    
       if(found_all_cards(cards_by_mana, JSON.parse(req.body.myCardsV2))) {
         console.log('found all cards ' + JSON.stringify(cards_by_mana));
-        const result = get_filled_response(cards_by_mana);
+        const result = get_filled_response(strategy.split('.')[0], cards_by_mana);
         console.log(JSON.stringify(result));
         res.json(result);
         return;
@@ -50,7 +50,7 @@ function get_cards_to_play(strategy, mana) {
   return cards_to_play.find(c => c.mana === mana);
 }
 
-function get_filled_response(cards_by_mana) {
+function get_filled_response(splinter, cards_by_mana) {
 
   var default_response = 
   {
@@ -69,7 +69,7 @@ function get_filled_response(cards_by_mana) {
     "monster_5_wins": "0,680000",  
     "monster_6_id": "",
     "monster_6_wins": "0,680000",
-    "color": "death",
+    "color": splinter,
     "teamRank": 2,
   };
   for(i = 0; i < cards_by_mana.cards.length; i++) {
