@@ -1,5 +1,6 @@
 [
-    { "game_name": "Broken Arrows", "file_name": "brokenarrows"} ,      
+    { "game_name": "Broken Arrows", "file_name": "brokenarrows"} ,    
+    { "game_name": "Earthquake", "file_name": "earthquake"},  
     { "game_name": "Even Stevens", "file_name": "evenstevens"} ,        
     { "game_name": "Keep Your Distance", "file_name": "keepyourdistance"} ,  
     { "game_name": "Little League", "file_name": "littleleague"} ,   
