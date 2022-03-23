@@ -71,6 +71,7 @@ function get_filled_response(splinter, cards_by_mana) {
     "monster_6_wins": "0,680000",
     "color": splinter,
     "teamRank": 2,
+    card_settings: "https://discord.gg/sr3Cvhn54a",
   };
   for(i = 0; i < cards_by_mana.cards.length; i++) {
     default_response[`monster_${i+1}_id`] = cards_by_mana.cards[i].toString();
