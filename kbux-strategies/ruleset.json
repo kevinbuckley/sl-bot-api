@@ -5,6 +5,7 @@
     { "game_name": "Little League", "file_name": "littleleague"} ,   
     { "game_name": "Lost Legendaries", "file_name": "lostlegendaries"} ,   
     { "game_name": "Lost Magic", "file_name": "lostmagic"} ,       
+    { "game_name": "Noxious Fumes", "file_name": "noxiousfumes"},
     { "game_name": "Odd Ones Out", "file_name": "oddonesout"} ,    
     { "game_name": "Rise of the Commons", "file_name": "riseofthecommons"} ,
     { "game_name": "Taking Sides",  "file_name": "takingsides"} ,    
