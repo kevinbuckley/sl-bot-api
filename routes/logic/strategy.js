@@ -37,11 +37,14 @@ function strategy_file_path(strategy) {
 function get_ruleset_strategy(request_obj) {
   // 1 and only 1 custom ruleset is used
   for(p of preferred_ruleset_splinters_in_order) {
-    var ruleset_in_file_name = p.split('.')[1];
-    const rs = ruleset_list.find(r => r.file_name == ruleset_in_file_name);
-    if(request_obj.rules.indexOf(rs.game_name) >= 0) {
-      // this preferred_ruleset is in the game requirements
-      return p;
+    var splinter = p.split('.')[0];
+    if(request_obj.splinters.includes(splinter)) {
+      var ruleset_in_file_name = p.split('.')[1];
+      const rs = ruleset_list.find(r => r.file_name == ruleset_in_file_name);
+      if(request_obj.rules.indexOf(rs.game_name) >= 0) {
+        // this preferred_ruleset is in the game requirements
+        return p;
+      }
     }
   }
   return null;
