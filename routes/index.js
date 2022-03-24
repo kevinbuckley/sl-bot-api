@@ -42,6 +42,7 @@ router.post('/get_team', async function(req, res, next) {
 
 function get_cards_to_play(strategy, mana) {
   const strategy_file = strategy_file_path(strategy);
+  console.log(`loading strategy ${strategy_file}`);
   var cards_to_play = JSON.parse(fs.readFileSync(strategy_file, 'utf8')); 
 
   if(mana > cards_to_play[cards_to_play.length - 1].mana) {
