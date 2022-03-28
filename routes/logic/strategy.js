@@ -2,19 +2,36 @@ var fs = require('fs'); /* Put it where other modules included */
 
 let ruleset_list = require(`../../${process.env.STRATEGIES_FOLDER}/ruleset.json`);
 let priority_list = require(`../../${process.env.STRATEGIES_FOLDER}/priority.json`);
-let preferred_splinters_in_order = priority_list.filter((p) => p.indexOf('.') < 0);
-let preferred_ruleset_splinters_in_order = priority_list.filter((p) => p.indexOf('.') >= 0);
+
+function get_strategy(request_obj) {
+
+  // try for quest first 
+  if(typeof request_obj.quest === 'object') {
+    const quest_priority_list = priority_list.filter(p => p.indexOf(request_obj.quest.splinter) === 0); // starts with that splinter
+    const quest_priority = get_strategy_with_priority(request_obj, quest_priority_list);
+    if(quest_priority != null) {
+      return quest_priority;
+    }
+  }
+
+  return get_strategy_with_priority(request_obj, priority_list);
+}
+
 
 // if you found specific splinter / strategy file and that is allowable, return that file
 // else if the rules have an ruleset rule, then return null
 // else if death, return death default
 // else if earth, return earth default
 // else return null;
-function get_strategy(request_obj) {
+function get_strategy_with_priority(request_obj, priority) {
+  let preferred_splinters_in_order = priority.filter((p) => p.indexOf('.') < 0);
+  let preferred_ruleset_splinters_in_order = priority.filter((p) => p.indexOf('.') >= 0);
+
   let count_of_special_rules = number_of_special_rules(request_obj);
 
+  // found one special rule, see if we have a custom strategy for it
   if(count_of_special_rules === 1) {
-    const ruleset_strategy = get_ruleset_strategy(request_obj);
+    const ruleset_strategy = get_ruleset_strategy(request_obj, preferred_ruleset_splinters_in_order);
     if(ruleset_strategy != null){
       console.log('using custom rule strategy');
       return ruleset_strategy;
@@ -27,14 +44,16 @@ function get_strategy(request_obj) {
     return null;
   }
 
-  return get_our_base_strategy(request_obj);
+  return get_our_base_strategy(request_obj, preferred_splinters_in_order);
+
 }
+
 
 function strategy_file_path(strategy) {
   return `./${process.env.STRATEGIES_FOLDER}/${strategy}.json`;
 }
   
-function get_ruleset_strategy(request_obj) {
+function get_ruleset_strategy(request_obj, preferred_ruleset_splinters_in_order) {
   // 1 and only 1 custom ruleset is used
   for(p of preferred_ruleset_splinters_in_order) {
     var splinter = p.split('.')[0];
@@ -59,7 +78,7 @@ function number_of_special_rules(request_obj) {
   return count;
 }
 
-function get_our_base_strategy(request_obj) {
+function get_our_base_strategy(request_obj, preferred_splinters_in_order) {
   for(splinter of preferred_splinters_in_order){
     console.log(splinter);
     if(request_obj.splinters.includes(splinter)) {
