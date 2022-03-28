@@ -4,7 +4,7 @@ const { route } = require('express/lib/application');
 const req = require('express/lib/request');
 var router = express.Router();
 var fs = require('fs'); /* Put it where other modules included */
-const { get_strategy, strategy_file_path } = require('./logic/strategy.js');
+const { get_strategy, get_cards_to_play } = require('./logic/strategy.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -39,17 +39,6 @@ router.post('/get_team', async function(req, res, next) {
   }
   await passThruCall(req.body, res);
 });
-
-function get_cards_to_play(strategy, mana) {
-  const strategy_file = strategy_file_path(strategy);
-  console.log(`loading strategy ${strategy_file}`);
-  var cards_to_play = JSON.parse(fs.readFileSync(strategy_file, 'utf8')); 
-
-  if(mana > cards_to_play[cards_to_play.length - 1].mana) {
-    return cards_to_play[cards_to_play.length - 1];
-  }
-  return cards_to_play.find(c => c.mana === mana);
-}
 
 function get_filled_response(splinter, cards_by_mana) {
 

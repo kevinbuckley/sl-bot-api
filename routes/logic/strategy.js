@@ -24,8 +24,12 @@ function get_strategy(request_obj) {
 // else if earth, return earth default
 // else return null;
 function get_strategy_with_priority(request_obj, priority) {
-  let preferred_splinters_in_order = priority.filter((p) => p.indexOf('.') < 0);
-  let preferred_ruleset_splinters_in_order = priority.filter((p) => p.indexOf('.') >= 0);
+  priority_filter_by_mana = priority.filter((p) => {
+    var strategy = get_cards_to_play(p, request_obj.mana);
+    return strategy != null;
+  });
+  let preferred_splinters_in_order = priority_filter_by_mana.filter((p) => p.indexOf('.') < 0);
+  let preferred_ruleset_splinters_in_order = priority_filter_by_mana.filter((p) => p.indexOf('.') >= 0);
 
   let count_of_special_rules = number_of_special_rules(request_obj);
 
@@ -33,14 +37,12 @@ function get_strategy_with_priority(request_obj, priority) {
   if(count_of_special_rules === 1) {
     const ruleset_strategy = get_ruleset_strategy(request_obj, preferred_ruleset_splinters_in_order);
     if(ruleset_strategy != null){
-      console.log('using custom rule strategy');
       return ruleset_strategy;
     }
   }
 
   // didn't find a special rule strategy but there are special rules
   if(count_of_special_rules != 0) {
-    console.log('passing through special');
     return null;
   }
 
@@ -82,12 +84,21 @@ function get_our_base_strategy(request_obj, preferred_splinters_in_order) {
   for(splinter of preferred_splinters_in_order){
     console.log(splinter);
     if(request_obj.splinters.includes(splinter)) {
-      console.log('using base rule strategy');
       return splinter;
     }
   }
-  console.log('passing through base');
   return null;
 }
 
-module.exports = { get_strategy, strategy_file_path };
+function get_cards_to_play(strategy, mana) {
+  const strategy_file = strategy_file_path(strategy);
+  var cards_to_play = JSON.parse(fs.readFileSync(strategy_file, 'utf8')); 
+
+  if(mana > cards_to_play[cards_to_play.length - 1].mana) {
+    return cards_to_play[cards_to_play.length - 1];
+  }
+  return cards_to_play.find(c => c.mana === mana);
+}
+
+
+module.exports = { get_strategy, get_cards_to_play };
