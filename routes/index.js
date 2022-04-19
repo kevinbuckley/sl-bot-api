@@ -11,6 +11,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.post('/get_team_by_hash', async function(req, res, next) {
+  await passThruCall(req.body, res, 'get_team_by_hash');
+});
+
+
 // if we have a custom strategy 
 //      AND we have the cards it specifies 
 //      AND the mana request is one we have a strategy for, 
@@ -37,7 +42,7 @@ router.post('/get_team', async function(req, res, next) {
       }
     }
   }
-  await passThruCall(req.body, res);
+  await passThruCall(req.body, res, "get_team");
 });
 
 function get_filled_response(splinter, cards_by_mana) {
@@ -77,9 +82,9 @@ function found_all_cards(cards_by_mana, myCardsV2) {
   return true;
 }
 
-async function passThruCall(request_obj, res) {
+async function passThruCall(request_obj, res, path) {
 
-  await axios.post('http://splinterlandsapi.pcjones.de:8080/get_team', request_obj)
+  await axios.post(`http://splinterlandsapi.pcjones.de:8080/${path}`, request_obj)
   .then(function (response) {
     console.log(response.data);
     res.json(response.data);
