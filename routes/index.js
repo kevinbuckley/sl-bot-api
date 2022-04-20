@@ -84,7 +84,7 @@ function found_all_cards(cards_by_mana, myCardsV2) {
 
 async function passThruCall(request_obj, res, path) {
 
-  await axios.post(`http://splinterlandsapi.pcjones.de:8080/${path}`, request_obj)
+  await axios.post(`http://lostvoid.xyz/v2/${path}`, request_obj)
   .then(function (response) {
     console.log(response.data);
     res.json(response.data);
