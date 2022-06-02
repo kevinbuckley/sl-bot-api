@@ -14,7 +14,7 @@ CARD_MIN_LEVEL=1
 ADD_ZERO_MANA_CARDS=true
 
 ## If set to false the bot will never play any starter cards. Only recommended if you have a ton of cards
-PLAY_STARTER_CARDS=false
+PLAY_STARTER_CARDS=true
 
 ## TBD
 #USE_FOCUS_ELEMENT_WINRATE_TRESHOLD=40
