@@ -1,4 +1,7 @@
 [
+    "water.riseofthecommons",
+    "water.lostlegendaries",
+    "water.upcloseandpersonal",
     "death.evenstevens",
     "death.oddonesout",
     "death.littleleague",
@@ -9,15 +12,12 @@
     "earth.keepyourdistance",
     "earth.evenstevens",
     "earth.brokenarrows",
-    "water.riseofthecommons",
-    "water.lostlegendaries",
-    "water.upcloseandpersonal",
     "fire.lostmagic",
     "fire.noxiousfumes",
     "life.earthquake",
+    "water",
     "death",
     "earth",
-    "water",
     "life",
     "fire"
 ]
