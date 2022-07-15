@@ -28,7 +28,8 @@ THREADS=1
 
 ##Disable this if you want a cleaner log or you have problems with too many
 ##requests to the splinterlands API. Disabling will also make battles 10-25 seconds faster.
-SHOW_BATTLE_RESULTS=true
+SHOW_BATTLE_RESULTS=false
+RANKED_FORMAT=modern
 ##################Lightning Mode Settings##################
 
 #######################API Settings########################
