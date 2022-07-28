@@ -1,3 +1,5 @@
 node_modules
 .env
 bot/accounts.txt
+accounts.txt
+bot/osx-x64/config
