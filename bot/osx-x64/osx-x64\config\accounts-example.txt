@@ -1,2 +1,0 @@
-username:postingkey
-username:postingkey
