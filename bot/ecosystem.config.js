@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    script: '"./osx-x64/Ultimate Splinterlands Bot V2"',
+    script: '"./linux-x64/Ultimate Splinterlands Bot V2"',
     name: "bot"
   }]
 };
