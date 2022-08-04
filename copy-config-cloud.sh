@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cp -r ./accounts.txt ./sl-bot-api/bot/linux-x64/config/
-cp -r ./sl-bot-api/bot/config-cloud.txt ./sl-bot-api/bot/linux-x64/config/config.txt
+cp -r ../accounts.txt ./bot/linux-x64/config/
+cp -r ./bot/config-cloud.txt ./bot/linux-x64/config/config.txt
